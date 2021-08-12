@@ -1,0 +1,50 @@
+<html>
+    <script>
+        alert("星期计算程序，可以计算出你输入的那一天是星期几！\n本程序无法计算1753年之前的日期，输入日期时请以“XXXX年”、“XX月”、“X日”(其中“X”代表阿拉伯数字)的形式输入或直接输入阿拉伯数字")
+        
+        do{
+            var year = parseInt(prompt("请输入年份："));
+            if(!(year >= 1753)){
+                alert("年份不符合规则");
+            }
+        }while(!(year >= 1753));
+        
+        do{
+            var month = parseInt(prompt("请输入月份："));
+            if(!(month > 0 && month <= 12)){
+                alert("月份不符合规则");
+            }
+        }while(!(month > 0 && month <= 12));
+        
+        do{
+            var date = parseInt(prompt("请输入日期："));
+            if(((month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) && date > 0 && date <= 31) || ((month == 4 || month==6 || month==9 || month==11) && date > 0 && date <= 30) || (month == 2 && (year%4 == 0 && year%100 != 0 || year%400 == 0) && date > 0 && date <= 29) || (month == 2 && !(year%4 == 0 && year%100 != 0 || year%400 == 0) && date > 0 && date <= 28)){
+                var dateCheck = true;
+            }else{
+                var dateCheck = false;
+                alert("日期不符合规则");
+            }
+        }while(dateCheck == false);
+        
+        var f = parseInt((14-month)/12);
+        var y = year-f;
+        var m = month+12*f-2;
+        var result = (date+y+parseInt(31*m/12)+parseInt(y/4)-parseInt(y/100)+parseInt(y/400))%7;
+
+        var x;
+        switch(result){
+            case 0: x = "日";break;
+            case 1: x = "一";break;
+            case 2: x = "二";break;
+            case 3: x = "三";break;
+            case 4: x = "四";break;
+            case 5: x = "五";break;
+            case 6: x = "六";break;
+        }
+        document.write(year+"年"+month+"月"+date+"日是星期"+x);
+        
+    </script>
+    <body>
+        <button onclick="location.reload()">再来一次</button>
+    </body>
+</html>
